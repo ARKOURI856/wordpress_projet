@@ -18,7 +18,22 @@
 defined( 'ABSPATH' ) || exit;
 
 ?>
+
 <?php do_action( 'woocommerce_widget_price_filter_start', $args ); ?>
+
+<?php
+	// Define or retrieve the form action
+	$form_action = esc_url( $form_action );
+	
+	// Check if 'index.php' is missing
+	if (strpos($form_action, 'index.php') === false) {
+		// Insert 'index.php' after the first '/' in the URL
+		$form_action = preg_replace('/^(https?:\/\/[^\/]+\/)/', '${1}index.php/', $form_action);
+	}
+
+	// Output the updated form action
+?>
+
 
 <form method="get" action="<?php echo esc_url( $form_action ); ?>">
 	<div class="price_slider_wrapper">
